@@ -1,13 +1,21 @@
 <a
   [routerLink]="route"
   routerLinkActive="bg-slate-100 text-slate-900 font-semibold"
-  class="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-all cursor-pointer"
+  [ngClass]="isCollapsed ? 'justify-center px-2' : 'justify-between px-4'"
+  class="flex items-center py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-all cursor-pointer group"
 >
-  <div class="flex items-center space-x-3">
-    <ng-content select="[icon]"></ng-content>
-    <span>{{ label }}</span>
+  <div class="flex items-center" [ngClass]="isCollapsed ? '' : 'space-x-3'">
+    <div class="text-slate-400 group-[.bg-slate-100]:text-slate-900 group-hover:text-slate-900 transition-colors flex items-center justify-center w-5 h-5">
+      <ng-content select="[icon]"></ng-content>
+    </div>
+    @if (!isCollapsed) {
+      <span class="truncate transition-all duration-200">{{ label }}</span>
+    }
   </div>
-  @if (badge) {
-    <span class="bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded-md font-mono">{{ badge }}</span>
+  
+  @if (badge && !isCollapsed) {
+    <span class="bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded-md font-mono group-[.bg-slate-100]:bg-slate-200/80 group-[.bg-slate-100]:text-slate-900 transition-all">
+      {{ badge }}
+    </span>
   }
 </a>
