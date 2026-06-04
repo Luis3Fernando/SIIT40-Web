@@ -2,3 +2,13 @@
 
 @import 'tailwindcss';
 @import 'ngx-toastr/toastr';
+
+@theme {
+  --color-gh-primary: #129978;
+  --color-gh-dark: #083731;
+  --color-gh-secondary: #D1F700;
+  --color-gh-light: #AAE1D6;
+  --color-gh-gray: #CACBCE;
+  --color-gh-success: #129978;
+  --color-gh-danger: #FF3B30;
+}
