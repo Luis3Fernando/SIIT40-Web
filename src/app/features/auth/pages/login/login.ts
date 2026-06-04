@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Button } from '../../../shared/components/button/button';
+import { Button } from '@components/button/button';
 
 @Component({
   selector: 'app-login',
@@ -30,13 +30,12 @@ export class Login {
     this.isLoading = true;
 
     setTimeout(() => {
-      this.isLoading = false;
-      
       if (this.email === 'admin@sysari.com' && this.password === 'admin123') {
         this.toastr.success('¡Bienvenido al sistema de control SIIT40!', 'Acceso Autorizado');
-        this.router.navigate(['/admin/home']);
+        this.router.navigate(['/dashboard/home']);
       } else {
         this.toastr.error('Credenciales incorrectas.', 'Error');
+        this.isLoading = false;
       }
     }, 1500);
   }
