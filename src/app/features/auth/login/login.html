@@ -1,17 +1,17 @@
-<div class="min-h-screen flex items-center justify-center bg-slate-950 relative overflow-hidden font-sans">
+<div class="min-h-screen flex items-center justify-center bg-slate-950 p-4 relative overflow-hidden font-sans">
   
-  <div class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#083731]/40 rounded-full blur-[130px]"></div>
-  <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#129978]/10 rounded-full blur-[120px]"></div>
+  <div class="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-[#083731]/40 rounded-full blur-[80px] sm:blur-[130px]"></div>
+  <div class="absolute bottom-[-10%] right-[-10%] w-[250px] h-[250px] sm:w-[500px] sm:h-[500px] bg-[#129978]/10 rounded-full blur-[70px] sm:blur-[120px]"></div>
 
-  <div class="w-full max-w-md p-8 bg-slate-900/90 border border-gh-dark/50 rounded-2xl shadow-2xl z-10 backdrop-blur-sm">
+  <div class="w-full max-w-md p-6 sm:p-8 bg-slate-900/90 border border-gh-dark/50 rounded-2xl shadow-2xl z-10 backdrop-blur-sm">
     
-    <div class="text-center mb-8">
-      <img src="./../../../shared/assets/icons/logo.png" class="w-16 h-16 mx-auto rounded-xl mb-3 object-cover border border-gh-primary/30 shadow-inner" alt="Logo">
-      <h1 class="text-2xl font-bold text-white tracking-tight">SIIT <span class="text-gh-secondary font-mono text-lg">v4.0</span></h1>
+    <div class="text-center mb-6 sm:mb-8">
+      <img [src]="logoPath" class="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-xl mb-3 object-cover border border-gh-primary/30 shadow-inner" alt="Logo">
+      <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">SIIT <span class="text-gh-secondary font-mono text-base sm:text-lg">v4.0</span></h1>
       <p class="text-xs text-gh-gray mt-1">Panel Administrativo de Monitoreo Agrícola</p>
     </div>
 
-    <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="space-y-5">
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="space-y-4 sm:space-y-5">
       
       <div>
         <label class="block text-[11px] font-semibold uppercase tracking-wider text-gh-light mb-2">Usuario / Email</label>
@@ -20,7 +20,7 @@
           name="email"
           [(ngModel)]="email"
           placeholder="admin@siit.com" 
-          class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-700 focus:outline-none focus:border-gh-primary focus:ring-1 focus:ring-gh-primary transition-all">
+          class="w-full px-4 py-2.5 sm:py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-700 focus:outline-none focus:border-gh-primary focus:ring-1 focus:ring-gh-primary transition-all">
       </div>
 
       <div>
@@ -30,23 +30,23 @@
           name="password"
           [(ngModel)]="password"
           placeholder="••••••••" 
-          class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-700 focus:outline-none focus:border-gh-primary focus:ring-1 focus:ring-gh-primary transition-all">
+          class="w-full px-4 py-2.5 sm:py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-700 focus:outline-none focus:border-gh-primary focus:ring-1 focus:ring-gh-primary transition-all">
       </div>
 
       <button 
         type="submit" 
         [disabled]="isLoading"
-        class="w-full py-3 bg-gh-primary hover:bg-gh-primary/90 disabled:bg-gh-dark disabled:text-gh-gray/50 text-white font-semibold rounded-xl tracking-wide transition-all shadow-lg shadow-gh-primary/10 flex items-center justify-center space-x-2 cursor-pointer">
+        class="w-full py-2.5 sm:py-3 bg-gh-primary hover:bg-gh-primary/90 disabled:bg-gh-dark disabled:text-gh-gray/50 text-sm text-white font-semibold rounded-xl tracking-wide transition-all shadow-lg shadow-gh-primary/10 flex items-center justify-center space-x-2 cursor-pointer">
         
         @if (!isLoading) {
           <span>Acceder al Sistema</span>
         } @else {
           <div class="flex items-center space-x-2">
-            <svg class="animate-spin h-5 w-5 text-gh-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <svg class="animate-spin h-4 w-4 sm:h-5 sm:w-5 text-gh-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <span class="text-gh-secondary text-sm">Sincronizando Nodos...</span>
+            <span class="text-gh-secondary text-xs sm:text-sm">Sincronizando Nodos...</span>
           </div>
         }
       </button>

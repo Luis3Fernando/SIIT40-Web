@@ -12,6 +12,7 @@ export class Login {
   email = '';
   password = '';
   isLoading = false;
+  logoPath = 'assets/icons/logo.png';
 
   constructor(
     private toastr: ToastrService,
