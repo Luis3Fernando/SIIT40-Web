@@ -3,17 +3,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "rootDir": "src",
-    "types": [],
-    "paths": {
-      "@models/*": ["./src/app/core/models/*"],
-      "@services/*": ["./src/app/core/services/*"],
-      "@interceptors/*": ["./src/app/core/interceptors/*"],
-      "@guards/*": ["./src/app/core/guards/*"],
-      "@features/*": ["./src/app/features/*"],
-      "@assets/*": ["./src/app/shared/assets/*"],
-      "@components/*": ["./src/app/shared/components/*"],
-      "@pipes/*": ["./src/app/shared/pipes/*"],
-    }
+    "types": []
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"]
