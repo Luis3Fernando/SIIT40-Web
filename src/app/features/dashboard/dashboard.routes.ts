@@ -7,15 +7,18 @@ export const DASHBOARD_ROUTES: Routes = [
     children: [
       {
         path: 'home',
-        loadComponent: () => import('./pages/home/home').then(m => m.Home)
+        loadComponent: () => import('./pages/home/home').then(m => m.Home),
+        data: { title: 'Resumen general' }
       },
       {
         path: 'about',
-        loadComponent: () => import('./pages/about/about').then(m => m.About)
+        loadComponent: () => import('./pages/about/about').then(m => m.About),
+        data: { title: 'Acerca del sistema' }
       },
       {
         path: 'contact',
-        loadComponent: () => import('./pages/contact/contact').then(m => m.Contact)
+        loadComponent: () => import('./pages/contact/contact').then(m => m.Contact),
+        data: { title: 'Soporte y contacto' }
       },
       {
         path: '',

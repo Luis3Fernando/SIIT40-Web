@@ -1,7 +1,13 @@
 <a
   [routerLink]="route"
-  routerLinkActive="bg-slate-100 text-gh-dark"
-  class="block px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors cursor-pointer"
+  routerLinkActive="bg-slate-100 text-slate-900 font-semibold"
+  class="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-all cursor-pointer"
 >
-  {{ label }}
+  <div class="flex items-center space-x-3">
+    <ng-content select="[icon]"></ng-content>
+    <span>{{ label }}</span>
+  </div>
+  @if (badge) {
+    <span class="bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded-md font-mono">{{ badge }}</span>
+  }
 </a>

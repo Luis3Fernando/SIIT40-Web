@@ -1,18 +1,83 @@
-<aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-full">
-  <div>
-    <div class="p-6 border-b border-slate-100 flex items-center space-x-3">
-      <img [src]="logoPath" class="w-8 h-8 rounded-lg object-cover" alt="Logo">
-      <span class="font-bold text-lg tracking-tight text-gh-dark">SIIT 4.0</span>
+<aside class="w-64 bg-white border-r border-slate-100 flex flex-col justify-between h-full font-sans select-none">
+  <div class="flex-1 overflow-y-auto">
+    
+    <div class="p-5 flex items-center justify-between border-b border-slate-50">
+      <div class="flex items-center space-x-3">
+        <img [src]="logoPath" class="w-7 h-7 rounded-lg object-cover" alt="Logo">
+        <span class="font-bold text-base tracking-tight text-slate-900">SIIT <span class="text-gh-primary font-mono text-sm">4.0</span></span>
+      </div>
+      <button class="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-50 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+        </svg>
+      </button>
     </div>
-    <nav class="p-4 space-y-1">
-      @for (item of menuItems; track item.route) {
-        <app-sidebar-item [route]="item.route" [label]="item.label"></app-sidebar-item>
-      }
-    </nav>
+
+    <div class="px-4 py-4">
+      <div class="flex items-center justify-between px-3 py-2.5 bg-slate-50 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-100/70 transition-all">
+        <div class="flex items-center space-x-3">
+          <div class="w-6 h-6 rounded-md bg-gh-dark flex items-center justify-center text-white font-mono text-xs font-bold">G</div>
+          <span class="text-sm font-semibold text-slate-800">Greenhouse A</span>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 text-slate-400">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="px-3 space-y-5">
+      <div>
+        <span class="block px-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">General</span>
+        <div class="space-y-0.5">
+          <app-sidebar-item route="/dashboard/home" label="Dashboard">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+          </app-sidebar-item>
+          <app-sidebar-item route="/dashboard/sectors" label="Sectores" [badge]="2">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-12-3h12m-12-3h12m-12-3h12m-12-3h12m-12-3h12" /></svg>
+          </app-sidebar-item>
+        </div>
+      </div>
+
+      <div>
+        <span class="block px-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Herramientas</span>
+        <div class="space-y-0.5">
+          <app-sidebar-item route="/dashboard/analytics" label="Analítica">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" /></svg>
+          </app-sidebar-item>
+          <app-sidebar-item route="/dashboard/about" label="Acerca de">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 11.517 1.407l-.04.02v3.999a.75.75 0 01-1.5 0V11.25zm.72-3.451a.75.75 0 10-1.5 0 .75.75 0 001.5 0zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </app-sidebar-item>
+          <app-sidebar-item route="/dashboard/contact" label="Soporte">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
+          </app-sidebar-item>
+        </div>
+      </div>
+
+      <div>
+        <span class="block px-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Perfil</span>
+        <div class="space-y-0.5">
+          <app-sidebar-item route="/dashboard/messages" label="Mensajes" [badge]="4">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0l-7.5-4.615a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+          </app-sidebar-item>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="p-4 border-t border-slate-100">
-    <a routerLink="/auth/login" class="block w-full text-center px-4 py-2 text-sm font-medium text-gh-danger bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
-      Cerrar Sesión
+
+  <div class="p-4 border-t border-slate-50 bg-slate-50/50 flex items-center justify-between">
+    <div class="flex items-center space-x-3 min-w-0">
+      <div class="w-9 h-9 rounded-full bg-gh-dark border border-gh-primary/20 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+        LC
+      </div>
+      <div class="flex flex-col min-w-0">
+        <span class="text-xs font-semibold text-slate-800 truncate">{{ username }}</span>
+        <span class="text-[10px] text-slate-400 truncate">{{ email }}</span>
+      </div>
+    </div>
+    <a routerLink="/auth/login" class="text-slate-400 hover:text-gh-danger p-1.5 rounded-lg hover:bg-red-50/50 transition-colors cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/xl" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+      </svg>
     </a>
   </div>
 </aside>

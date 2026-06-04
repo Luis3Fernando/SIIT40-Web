@@ -9,4 +9,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class SidebarItem {
   @Input() route: string = '';
   @Input() label: string = '';
+  @Input() badge?: number;
 }
