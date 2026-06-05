@@ -30,6 +30,13 @@ export class Login {
     this.isLoading = true;
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
+        if (response.status === 'error') {
+          this.isLoading = false;
+          this.cdr.detectChanges();
+          const errorMessage = response.message?.[0]?.message || 'El correo electrónico no se encuentra registrado.';
+          this.toastr.error(errorMessage, 'Error de autenticación');
+          return;
+        }
         const welcomeMessage = response.message?.[0]?.message || 'Autenticación exitosa.';
         this.toastr.success(welcomeMessage, 'Bienvenido');
         this.router.navigate(['/dashboard/home']);
