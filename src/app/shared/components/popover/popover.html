@@ -1,0 +1,10 @@
+<div class="relative inline-block">
+  <div #triggerWrapper (click)="toggle()" class="inline-block cursor-pointer">
+    <ng-content select="[trigger]"></ng-content>
+  </div>
+  @if (isOpen) {
+    <div #popoverContent [style.top.px]="popoverTop" [style.left.px]="popoverLeft" class="fixed bg-white border border-slate-100 rounded-lg shadow-xl shadow-gh-dark/20 z-50 p-4 min-w-70 text-slate-700 animate-fade-in">
+      <ng-content select="[content]"></ng-content>
+    </div>
+  }
+</div>

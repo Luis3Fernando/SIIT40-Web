@@ -1,70 +1,47 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 font-sans text-slate-800 max-w-6xl mx-auto select-none animate-fade-in">
-  
   <div class="bg-white border border-slate-100 rounded-2xl shadow-xs p-6 flex flex-col items-center justify-between relative overflow-hidden h-full">
     <div class="absolute -top-10 -right-10 w-32 h-32 bg-gh-light/10 rounded-full blur-xl"></div>
     <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-gh-primary/5 rounded-full blur-xl"></div>
-
     <div class="w-full text-center z-10 flex-1 flex flex-col items-center justify-center py-4">
       <div class="relative w-24 h-24 rounded-2xl bg-gh-dark flex items-center justify-center text-gh-secondary font-mono text-2xl font-bold shadow-md overflow-hidden mb-4 border border-slate-100">
-        <img 
-          [src]="photoPath" 
-          (error)="$event.target.style.display = 'none'"
-          class="absolute inset-0 w-full h-full object-cover z-20"
-          alt="Luis Chumbes"
-        />
+        <img [src]="photoPath" (error)="$event.target.style.display = 'none'" class="absolute inset-0 w-full h-full object-cover z-20" alt="Luis Chumbes" />
         <span class="z-10">LC</span>
       </div>
-
       <h2 class="text-base font-bold text-slate-900 tracking-tight">{{ developerName }}</h2>
       <p class="text-xs text-gh-primary font-medium mt-1">{{ developerRole }}</p>
-      
       <div class="mt-3 inline-flex items-center gap-1 px-2.5 py-0.5 bg-gh-dark text-gh-secondary font-mono text-[10px] rounded-md uppercase font-semibold tracking-wider">
-        Autor de Tesis
+        Autor de tesis
       </div>
     </div>
-
     <div class="w-full space-y-2 z-10 pt-4 border-t border-slate-50">
-      <a 
-        [href]="linkedinUrl" 
-        target="_blank" 
-        class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100/70 border border-slate-100 rounded-xl transition-all cursor-pointer group"
-      >
+      <a [href]="linkedinUrl" target="_blank" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100/70 border border-slate-100 rounded-xl transition-all cursor-pointer group">
         <div class="flex items-center space-x-3">
           <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.67c0-.25.02-.5.1-.68a1.14 1.14 0 0 1 1-.77c.76 0 1 .58 1 1.42v4.7zM6.5 8.37a1.37 1.37 0 1 0 0-2.75 1.37 1.37 0 0 0 0 2.75M8 18.5V10.13H5V18.5z"/>
           </svg>
-          <span class="text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors">LinkedIn Perfil</span>
+          <span class="text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors">Perfil de LinkedIn</span>
         </div>
         <svg class="w-3.5 h-3.5 text-slate-300 group-hover:text-slate-500 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
         </svg>
       </a>
-
-      <a 
-        [href]="githubUrl" 
-        target="_blank" 
-        class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100/70 border border-slate-100 rounded-xl transition-all cursor-pointer group"
-      >
+      <a [href]="githubUrl" target="_blank" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100/70 border border-slate-100 rounded-xl transition-all cursor-pointer group">
         <div class="flex items-center space-x-3">
           <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.0.069-.0 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
-          <span class="text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors">GitHub Repositorio</span>
+          <span class="text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors">Repositorio de GitHub</span>
         </div>
         <svg class="w-3.5 h-3.5 text-slate-300 group-hover:text-slate-500 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
         </svg>
       </a>
-
-      <a 
-        [href]="'mailto:' + developerEmail" 
-        class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100/70 border border-slate-100 rounded-xl transition-all cursor-pointer group"
-      >
+      <a [href]="'mailto:' + developerEmail" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100/70 border border-slate-100 rounded-xl transition-all cursor-pointer group">
         <div class="flex items-center space-x-3">
           <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0l-7.5-4.615a2.25 2.25 0 01-1.07-1.916V6.75"/>
           </svg>
-          <span class="text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors truncate max-w-[140px] md:max-w-none">{{ developerEmail }}</span>
+          <span class="text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors truncate max-w-35 md:max-w-none">{{ developerEmail }}</span>
         </div>
         <svg class="w-3.5 h-3.5 text-slate-300 group-hover:text-slate-500 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -72,59 +49,51 @@
       </a>
     </div>
   </div>
-
   <div class="lg:col-span-2 space-y-6">
-    
     <div class="bg-white border border-slate-100 rounded-2xl shadow-xs p-6 space-y-4">
       <div>
-        <span class="text-[10px] font-bold text-gh-primary uppercase tracking-wider">Marco Investigativo</span>
-        <h3 class="text-lg font-bold text-slate-900 mt-1">Investigación de Tesis Académica</h3>
+        <span class="text-[10px] font-bold text-gh-primary uppercase tracking-wider">Marco investigativo</span>
+        <h3 class="text-lg font-bold text-slate-900 mt-1">Investigación de tesis académica</h3>
       </div>
-      
       <p class="text-xs text-slate-500 leading-relaxed">
-        El sistema de software y hardware <strong class="text-slate-800">SIIT 4.0 (Sistema de Invernadero Inteligente con Tecnología 4.0)</strong> ha sido concebido y estructurado como un proyecto de investigación científica para optar el título profesional de Ingeniería. Su núcleo radica en la fusión de metodologías ágiles, computación en la nube y automatización perimetral agrícola.
+        El sistema de software y hardware <strong class="text-slate-800">SIIT 4.0 (Sistema de invernadero inteligente con tecnología 4.0)</strong> ha sido concebido y estructurado como un proyecto de investigación científica para optar el título profesional de Ingeniería. Su núcleo radica en la fusión de arquitecturas de comunicación perimetral, sincronización desacoplada offline y procesamiento centralizado de variables agrícolas.
       </p>
-
       <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl space-y-2">
         <h4 class="text-xs font-semibold text-gh-dark flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-gh-primary"></span>
-          Objetivo General del Proyecto
+          Objetivo general del proyecto
         </h4>
         <p class="text-[11px] text-slate-500 leading-relaxed">
-          Diseñar e implementar una arquitectura escalable de Internet de las Cosas (IoT) orientada a la agricultura vertical protegida, optimizando el consumo hídrico, controlando las variables climáticas críticas en tiempo real y garantizando un aprovisionamiento eficiente mediante fuentes de energía renovable.
+          Diseñar e implementar una arquitectura escalable de Internet de las cosas (IoT) orientada a la producción diversificada protegida, optimizando de forma automática o por demanda el consumo hídrico, controlando las variables climáticas críticas en tiempo real y garantizando un aprovisionamiento energético independiente.
         </p>
       </div>
     </div>
-
     <div class="bg-white border border-slate-100 rounded-2xl shadow-xs p-6">
-      <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">Arquitectura Tecnológica del Proyecto</h3>
-      
+      <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">Arquitectura tecnológica del proyecto</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="p-4 border border-slate-100 hover:border-gh-light rounded-xl transition-all space-y-2">
           <div class="flex items-center space-x-2 text-gh-primary">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21M6.75 6.75h10.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V9a2.25 2.25 0 012.25-2.25z"/>
             </svg>
-            <span class="text-xs font-bold text-slate-800">Hardware & Firmware IoT</span>
+            <span class="text-xs font-bold text-slate-800">Hardware & firmware IoT distributed</span>
           </div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
-            Nodos controladores basados en microcontroladores <strong class="text-slate-700">ESP32</strong>, sensores volumétricos de humedad de suelo, termistores ambientales, almacenamiento de contingencia offline (tarjetas SD) y actuadores de válvulas solenoides acoplados a sistemas solares autónomos.
+            Nodos controladores basados en microcontroladores <strong class="text-slate-700">ESP32</strong> organizados en una topología inalámbrica dirigida por el protocolo <strong class="text-slate-700">ESP-NOW</strong>. Múltiples nodos esclavos monitorizan la telemetría del suelo y ambiente segmentados por zonas individuales de cultivo, transmitiendo las ráfagas hacia un nodo maestro centralizado encargado de la persistencia física local (memorias SD) y la conmutación de electroválvulas hídricas.
           </p>
         </div>
-
         <div class="p-4 border border-slate-100 hover:border-gh-light rounded-xl transition-all space-y-2">
           <div class="flex items-center space-x-2 text-gh-primary">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>
             </svg>
-            <span class="text-xs font-bold text-slate-800">Software, API & Cloud</span>
+            <span class="text-xs font-bold text-slate-800">Sincronización, API web & cloud</span>
           </div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
-            Plataforma modular construida en el Frontend con <strong class="text-slate-700">Angular + Tailwind CSS</strong>, Backend API de alta velocidad programado sobre <strong class="text-slate-700">FastAPI (Python)</strong>, orquestación mediante <strong class="text-slate-700">Docker Compose</strong> e infraestructura de despliegue en la nube.
+            Ecosistema desacoplado diseñado para zonas rurales sin conectividad móvil regular. Un aplicativo nativo en <strong class="text-slate-700">React Native</strong> se conecta vía Wi-Fi local al nodo maestro del invernadero para descargar y almacenar estructuras JSON mediante una arquitectura orientada a eventos (EDA). Al recuperar red, los datos se vuelcan hacia un backend de alto rendimiento en <strong class="text-slate-700">FastAPI</strong> protegido por <strong class="text-slate-700">JWT</strong> y visualizado en dashboards analíticos de <strong class="text-slate-700">Angular</strong>.
           </p>
         </div>
       </div>
     </div>
-
   </div>
 </div>
