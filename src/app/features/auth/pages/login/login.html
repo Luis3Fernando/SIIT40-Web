@@ -3,42 +3,20 @@
   <div class="absolute bottom-[-10%] right-[-10%] w-75 h-75 sm:w-150 sm:h-150 bg-[#129978]/10 rounded-full blur-[70px] sm:blur-[120px]"></div>
   <div class="w-full max-w-md p-6 sm:p-8 bg-slate-900/90 border border-gh-dark/50 rounded-2xl shadow-2xl shadow-gh-dark z-10 backdrop-blur-sm">
     <div class="text-center mb-6 sm:mb-8">
-      <img
-        [src]="logoPath"
-        class="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-xl mb-3 object-cover"
-        alt="Logo"
-      />
-      <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
-        SIIT <span class="text-gh-secondary font-mono text-xl sm:text-2xl">40</span>
-      </h1>
-      <p class="text-xs text-gh-gray mt-1">Sistema de Invernadero Inteligente con Tecnología 4.0</p>
+      <img [src]="logoPath" class="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-xl mb-3 object-cover" alt="Logo" />
+      <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">SIIT <span class="text-gh-secondary font-mono text-xl sm:text-2xl">4.0</span></h1>
+      <p class="text-xs text-gh-gray mt-1">Sistema de invernadero inteligente con tecnología 4.0</p>
     </div>
     <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="space-y-4 sm:space-y-5">
       <div>
         <label class="block text-[11px] font-semibold uppercase tracking-wider text-white mb-2">Email</label>
-        <input
-          type="email"
-          name="email"
-          [(ngModel)]="email"
-          placeholder="admin@sysari.com"
-          class="w-full px-1 py-2.5 sm:py-3 bg-transparent border-b border-t-0 border-x-0 border-slate-800 rounded-none text-sm text-white placeholder-slate-700 focus:outline-none focus:border-white focus:ring-0 transition-all"
-        />
+        <input type="email" name="email" [(ngModel)]="email" placeholder="admin@sysari.com" class="w-full px-1 py-2.5 sm:py-3 bg-transparent border-b border-t-0 border-x-0 border-slate-800 rounded-none text-sm text-white placeholder-slate-700 focus:outline-none focus:border-white focus:ring-0 transition-all" />
       </div>
       <div>
         <label class="block text-[11px] font-semibold uppercase tracking-wider text-white mb-2">Contraseña</label>
         <div class="relative">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            name="password"
-            [(ngModel)]="password"
-            placeholder="••••••••"
-            class="w-full pl-1 pr-10 py-2.5 sm:py-3 bg-transparent border-b border-t-0 border-x-0 border-slate-800 rounded-none text-sm text-white placeholder-slate-700 focus:outline-none focus:border-white focus:ring-0 transition-all"
-          />
-          <button
-            type="button"
-            (click)="showPassword = !showPassword"
-            class="absolute right-1 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors focus:outline-none cursor-pointer"
-          >
+          <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="password" placeholder="••••••••" class="w-full pl-1 pr-10 py-2.5 sm:py-3 bg-transparent border-b border-t-0 border-x-0 border-slate-800 rounded-none text-sm text-white placeholder-slate-700 focus:outline-none focus:border-white focus:ring-0 transition-all" />
+          <button type="button" (click)="showPassword = !showPassword" class="absolute right-1 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors focus:outline-none cursor-pointer">
             @if (showPassword) {
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
@@ -52,8 +30,7 @@
           </button>
         </div>
       </div>
-      <app-button type="submit" variant="primary" text="Inciar sesión" [isLoading]="isLoading">
-      </app-button>
+      <app-button type="submit" variant="primary" text="Iniciar sesión" [isLoading]="isLoading"></app-button>
     </form>
   </div>
 </div>
