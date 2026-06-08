@@ -14,6 +14,11 @@ export const routes: Routes = [
     loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
   },
   {
+    path: 'species',
+    canActivate: [authGuard],
+    loadChildren: () => import('./features/species/species.routes').then(m => m.SPECIES_ROUTES)
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'

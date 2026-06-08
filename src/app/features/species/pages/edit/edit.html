@@ -1,0 +1,47 @@
+<div class="space-y-6 font-sans text-slate-800 max-w-2xl mx-auto select-none p-1 animate-fade-in">
+  <div class="bg-white border border-slate-100 rounded-2xl shadow-xs p-6 space-y-6">
+    <div>
+      <h2 class="text-base font-bold text-slate-900 tracking-tight">Modificar especie</h2>
+      <p class="text-xs text-slate-500 mt-0.5">Actualiza los rangos óptimos de las variables críticas para estabilizar los ciclos vegetativos.</p>
+    </div>
+    <form class="space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Nombre de la especie</label>
+          <input type="text" value="Tomate cherry" class="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-gh-light focus:bg-white transition-all" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Zona de asignación</label>
+          <select class="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-gh-light focus:bg-white transition-all appearance-none cursor-pointer">
+            <option value="A" selected>Zona a - Cultivos verticales</option>
+            <option value="B">Zona b - Hidroponía</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Temperatura mínima (°C)</label>
+          <input type="number" value="18.0" class="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-gh-light focus:bg-white transition-all" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Temperatura máxima (°C)</label>
+          <input type="number" value="24.0" class="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-gh-light focus:bg-white transition-all" />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Humedad de suelo mínima (%)</label>
+          <input type="number" value="60" class="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-gh-light focus:bg-white transition-all" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Humedad de suelo máxima (%)</label>
+          <input type="number" value="80" class="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-gh-light focus:bg-white transition-all" />
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-4 border-t border-slate-50">
+        <button type="button" (click)="goBack()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all cursor-pointer">Cancelar</button>
+        <app-button type="submit" variant="primary" text="Actualizar especie"></app-button>
+      </div>
+    </form>
+  </div>
+</div>
