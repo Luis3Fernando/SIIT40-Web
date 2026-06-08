@@ -1,0 +1,67 @@
+<div class="space-y-6 font-sans text-slate-800 max-w-6xl mx-auto select-none animate-fade-in">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white border border-slate-100 rounded-2xl p-6 shadow-xs">
+    <div>
+      <h2 class="text-lg font-bold text-slate-900 tracking-tight">Monitoreo del invernadero</h2>
+      <p class="text-xs text-slate-500 mt-0.5">Control en tiempo real de los lotes de cultivo, ubicación por zonas y estados fenológicos.</p>
+    </div>
+    <app-button variant="dark" text="Registrar siembra" (click)="goToCreate()"></app-button>
+  </div>
+  @if (isLoading) {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (item of [1, 2, 3]; track item) {
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs animate-pulse space-y-4">
+          <div class="h-4 bg-slate-100 rounded w-1/3"></div>
+          <div class="h-8 bg-slate-50 rounded-xl"></div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (item of plants; track item.id) {
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between hover:border-gh-light/60 transition-all">
+          <div class="space-y-4">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div class="w-2.5 h-10 rounded-full shrink-0" [style.backgroundColor]="item.specie.color"></div>
+                <div class="min-w-0 flex-1">
+                  <h3 class="text-sm font-bold text-slate-900 truncate">{{ item.specie.name }}</h3>
+                  <p class="text-[11px] text-slate-400 italic truncate font-medium mt-0.5">{{ item.specie.scientific_name }}</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-1 shrink-0">
+                <button (click)="goToEdit(item.id)" class="p-1.5 text-slate-400 hover:text-gh-primary hover:bg-slate-50 rounded-lg transition-colors cursor-pointer">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+                </button>
+                <button (click)="openDeleteModal(item.id)" class="p-1.5 text-slate-400 hover:text-gh-danger hover:bg-slate-50 rounded-lg transition-colors cursor-pointer">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-1.5 12a1.5 1.5 0 01-1.5 1.5H7.5A1.5 1.5 0 016 20.25l-1.5-12m3 0h9M10.5 3.75h3" /></svg>
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-50 text-center">
+              <div class="bg-slate-50 p-2 rounded-xl">
+                <span class="block text-[9px] font-semibold uppercase tracking-wide text-slate-400">Zona actual</span>
+                <span class="text-xs font-bold text-slate-800 mt-0.5 block">Zona {{ item.zone }}</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-xl">
+                <span class="block text-[9px] font-semibold uppercase tracking-wide text-slate-400">Cantidad</span>
+                <span class="text-xs font-bold text-slate-800 mt-0.5 block">{{ item.count }} uds</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center text-[10px] font-semibold border-t border-slate-50 pt-3">
+            <span class="px-2 py-0.5 bg-slate-100 rounded-md text-slate-600">{{ item.stage }}</span>
+          </div>
+        </div>
+      } @empty {
+        <div class="col-span-full bg-white border border-slate-100 rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-2">
+          <span class="text-3xl">🏡</span>
+          <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-1">El invernadero está vacío</h3>
+          <p class="text-xs text-slate-400 max-w-sm leading-normal">No se registran lotes vegetales activos en producción dentro de la infraestructura hídrica actual.</p>
+        </div>
+      }
+    </div>
+  }
+</div>
+<app-modal [isOpen]="isDeleteModalOpen" title="Dar de baja cultivo" confirmText="Dar de baja" cancelText="Mantener" [isConfirmLoading]="isDeleting" (cancel)="closeDeleteModal()" (confirm)="confirmDelete()">
+  ¿Estás seguro de que deseas retirar este lote del invernadero? Esta acción suspenderá los ciclos de riego automáticos programados para esta zona.
+</app-modal>

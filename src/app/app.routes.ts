@@ -19,6 +19,11 @@ export const routes: Routes = [
     loadChildren: () => import('./features/species/species.routes').then(m => m.SPECIES_ROUTES)
   },
   {
+    path: 'greenhouse',
+    canActivate: [authGuard],
+    loadChildren: () => import('./features/greenhouse/greenhouse.routes').then(m => m.GREENHOUSE_ROUTES)
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'
