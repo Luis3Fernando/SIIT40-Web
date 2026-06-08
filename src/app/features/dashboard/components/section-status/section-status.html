@@ -1,0 +1,44 @@
+<div class="space-y-4">
+  <div>
+    <h2 class="text-base font-bold text-slate-900 tracking-tight">Estado operativo</h2>
+    <p class="text-xs text-slate-500 mt-0.5">Visión general macro y alertas tempranas del entorno automatizado.</p>
+  </div>
+  @if (isLoading) {
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      @for (item of [1, 2, 3]; track item) {
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs animate-pulse h-24"></div>
+      }
+    </div>
+  } @else if (data) {
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex items-center justify-between hover:border-slate-200 transition-all">
+        <div class="space-y-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Biomasa activa</span>
+          <span class="text-2xl font-black text-slate-900 leading-none">{{ data.plant_summary.total_plants_count }}</span>
+          <span class="text-[10px] text-slate-400 block font-medium">Unidades vegetales vivas</span>
+        </div>
+        <div class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-xl text-slate-700">🌱</div>
+      </div>
+      <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex items-center justify-between hover:border-slate-200 transition-all">
+        <div class="space-y-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Sectores bajo riego</span>
+          <span class="text-2xl font-black text-slate-900 leading-none">{{ data.plant_summary.active_crop_sectors }}</span>
+          <span class="text-[10px] text-slate-400 block font-medium">Zonas perimetrales activas</span>
+        </div>
+        <div class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-xl text-slate-700">💧</div>
+      </div>
+      <div [ngClass]="data.plant_summary.has_critical_plants ? 'border-red-100 bg-red-50/10' : 'bg-white border-slate-100'" class="border rounded-2xl p-5 shadow-xs flex items-center justify-between hover:border-slate-200 transition-all">
+        <div class="space-y-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Umbrales de riesgo</span>
+          <span [ngClass]="data.plant_summary.has_critical_plants ? 'text-red-600' : 'text-gh-primary'" class="text-sm font-bold block mt-1">
+            {{ data.plant_summary.has_critical_plants ? 'Atención requerida' : 'Estable e idóneo' }}
+          </span>
+          <span class="text-[10px] text-slate-400 block font-medium">Estado general del sistema</span>
+        </div>
+        <div [ngClass]="data.plant_summary.has_critical_plants ? 'bg-red-50 text-red-500' : 'bg-emerald-50 text-emerald-500'" class="w-11 h-11 rounded-xl flex items-center justify-center text-lg font-bold">
+          {{ data.plant_summary.has_critical_plants ? '⚠' : '✓' }}
+        </div>
+      </div>
+    </div>
+  }
+</div>
