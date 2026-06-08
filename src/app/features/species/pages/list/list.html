@@ -4,40 +4,72 @@
       <h2 class="text-lg font-bold text-slate-900 tracking-tight">Catálogo de especies</h2>
       <p class="text-xs text-slate-500 mt-0.5">Administración y control de los perfiles botánicos cultivados en el invernadero Lahuani.</p>
     </div>
-    <app-button variant="primary" text="Agregar especie" (click)="goToCreate()"></app-button>
+    <app-button variant="dark" text="Agregar especie" (click)="goToCreate()"></app-button>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-    <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between hover:border-gh-light/60 transition-all">
-      <div class="space-y-4">
-        <div class="flex items-start justify-between">
+  @if (isLoading) {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (item of [1, 2, 3]; track item) {
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs animate-pulse space-y-4">
           <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-gh-primary/10 flex items-center justify-center text-gh-primary text-xl">🍅</div>
-            <div>
-              <h3 class="text-sm font-bold text-slate-900 truncate">Tomate cherry</h3>
-              <span class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 bg-slate-50 border border-slate-100 rounded-md text-[10px] font-semibold text-slate-600">Zona a</span>
+            <div class="w-10 h-10 rounded-xl bg-slate-100"></div>
+            <div class="flex-1 space-y-2">
+              <div class="h-3 bg-slate-100 rounded-md w-3/4"></div>
+              <div class="h-2 bg-slate-100 rounded-md w-1/2"></div>
             </div>
           </div>
-          <div class="flex items-center space-x-1">
-            <button (click)="goToEdit(1)" class="p-1.5 text-slate-400 hover:text-gh-primary hover:bg-slate-50 rounded-lg transition-colors cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
-            </button>
-            <button class="p-1.5 text-slate-400 hover:text-gh-danger hover:bg-slate-50 rounded-lg transition-colors cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
-            </button>
+          <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-50">
+            <div class="h-8 bg-slate-50 rounded-xl"></div>
+            <div class="h-8 bg-slate-50 rounded-xl"></div>
+            <div class="h-8 bg-slate-50 rounded-xl"></div>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-3 pt-2 border-t border-slate-50">
-          <div class="bg-slate-50 p-2.5 rounded-xl">
-            <span class="block text-[10px] font-medium text-slate-400">Temperatura ideal</span>
-            <span class="text-xs font-bold text-slate-800 mt-0.5">18.0°C - 24.0°C</span>
-          </div>
-          <div class="bg-slate-50 p-2.5 rounded-xl">
-            <span class="block text-[10px] font-medium text-slate-400">Humedad de suelo</span>
-            <span class="text-xs font-bold text-slate-800 mt-0.5">60.0% - 80.0%</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt-4 flex items-center gap-1.5 text-[10px] font-semibold text-gh-primary bg-gh-primary/5 border border-gh-primary/10 rounded-lg px-2.5 py-1 w-fit"><span class="w-1 h-1 rounded-full bg-gh-primary"></span>Monitoreo activo</div>
+      }
     </div>
-  </div>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (item of species; track item.species_id) {
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between hover:border-gh-light/60 transition-all">
+          <div class="space-y-4">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3 min-w-0">
+                @if (item.image_url) {
+                  <img [src]="item.image_url" class="w-10 h-10 rounded-xl object-cover border border-slate-50" alt="Especie" />
+                } @else {
+                  <div class="w-10 h-10 rounded-xl bg-gh-primary/10 flex items-center justify-center text-gh-primary text-xl">🌱</div>
+                }
+                <div class="min-w-0 flex-1">
+                  <h3 class="text-sm font-bold text-slate-900 truncate">{{ item.name }}</h3>
+                  <p class="text-[11px] text-slate-400 italic truncate font-medium mt-0.5">{{ item.scientific_name }}</p>
+                </div>
+              </div>
+              <button (click)="goToEdit(item.species_id)" class="p-1.5 text-slate-400 hover:text-gh-primary hover:bg-slate-50 rounded-lg transition-colors cursor-pointer shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+              </button>
+            </div>
+            <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-50 text-center">
+              <div class="bg-slate-50 p-2 rounded-xl">
+                <span class="block text-[9px] font-semibold uppercase tracking-wide text-slate-400">Volumen</span>
+                <span class="text-xs font-bold text-slate-800 mt-0.5 block">{{ item.vol }}L</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-xl">
+                <span class="block text-[9px] font-semibold uppercase tracking-wide text-slate-400">Frecuencia</span>
+                <span class="text-xs font-bold text-slate-800 mt-0.5 block">{{ item.freq }}h</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-xl">
+                <span class="block text-[9px] font-semibold uppercase tracking-wide text-slate-400">RAW</span>
+                <span class="text-xs font-bold text-slate-800 mt-0.5 block">{{ item.raw }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-1.5 text-[10px] font-semibold text-gh-primary bg-gh-primary/5 border border-gh-primary/10 rounded-lg px-2.5 py-1 w-fit"><span class="w-1.5 h-1.5 rounded-full" [style.backgroundColor]="item.color"></span>Perfil configurado</div>
+        </div>
+      } @empty {
+        <div class="col-span-full bg-white border border-slate-100 rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-2">
+          <span class="text-3xl">🍃</span>
+          <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-1">No hay especies registradas</h3>
+          <p class="text-xs text-slate-400 max-w-sm leading-normal">El catálogo se encuentra vacío en este momento. Crea un nuevo perfil botánico para iniciar la telemetría y el riego automatizado en las zonas del invernadero.</p>
+        </div>
+      }
+    </div>
+  }
 </div>

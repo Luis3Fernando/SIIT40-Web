@@ -1,30 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { APIResponse, Specie, SpecieCreateDTO, SpecieUpdateDTO } from '../models/specie.model';
 import { environment } from '../environments/environment';
+import { ApiResponse } from '../models/api-response';
+import { Specie, SpecieCreateDTO, SpecieUpdateDTO } from '../models/specie.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpecieService {
-  private readonly apiUrl = `${environment.apiUrl}/${environment.apiUrl}/specie`;
+  private http = inject(HttpClient);
+  private readonly apiUrl = `${environment.apiUrl}/specie`;
 
-  constructor(private http: HttpClient) {}
-
-  getAll(): Observable<APIResponse<Specie[]>> {
-    return this.http.get<APIResponse<Specie[]>>(this.apiUrl);
+  getAll(): Observable<ApiResponse<Specie[]>> {
+    return this.http.get<ApiResponse<Specie[]>>(this.apiUrl);
   }
 
-  create(data: SpecieCreateDTO): Observable<APIResponse<Specie>> {
-    return this.http.post<APIResponse<Specie>>(this.apiUrl, data);
+  create(data: SpecieCreateDTO): Observable<ApiResponse<Specie>> {
+    return this.http.post<ApiResponse<Specie>>(this.apiUrl, data);
   }
 
-  update(speciesId: string, data: SpecieUpdateDTO): Observable<APIResponse<Specie>> {
-    return this.http.patch<APIResponse<Specie>>(`${this.apiUrl}/${speciesId}`, data);
+  update(speciesId: string, data: SpecieUpdateDTO): Observable<ApiResponse<Specie>> {
+    return this.http.patch<ApiResponse<Specie>>(`${this.apiUrl}/${speciesId}`, data);
   }
 
-  delete(speciesId: string): Observable<APIResponse<void>> {
-    return this.http.delete<APIResponse<void>>(`${this.apiUrl}/${speciesId}`);
+  delete(speciesId: string): Observable<ApiResponse<void>> {
+    return this.http.delete<ApiResponse<void>>(`${this.apiUrl}/${speciesId}`);
   }
 }

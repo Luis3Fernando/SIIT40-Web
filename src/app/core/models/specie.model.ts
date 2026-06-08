@@ -1,14 +1,3 @@
-export interface ResponseMessage {
-  type: string;
-  message: string;
-}
-
-export interface APIResponse<T> {
-  status: string;
-  message: ResponseMessage[];
-  data: T;
-}
-
 export interface Specie {
   species_id: string;
   name: string;
