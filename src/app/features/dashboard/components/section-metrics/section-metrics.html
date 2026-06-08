@@ -1,0 +1,140 @@
+<div class="space-y-6 font-sans">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white border border-slate-100 rounded-2xl p-5 shadow-2xs">
+    <div>
+      <h2 class="text-base font-bold text-gh-dark tracking-tight">Lecturas ambientales e hídricas</h2>
+      <p class="text-xs text-slate-500 mt-0.5">Análisis estadístico de sensores distribuidos por nodos periféricos.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-4">
+      <div class="flex flex-col gap-1.5 w-full sm:w-44">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 select-none">Fecha de telemetría</span>
+        <input type="date" name="selectedDate" [(ngModel)]="selectedDate" (change)="emitFilters()" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 bg-white cursor-pointer focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 h-9 transition-all" />
+      </div>
+      <div class="w-full sm:w-44">
+        <app-select label="Dispositivo hardware" name="node" [(ngModel)]="selectedNode" [options]="nodeOptions" (ngModelChange)="emitFilters()"></app-select>
+      </div>
+    </div>
+  </div>
+  @if (isLoading) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      @for (item of [1, 2, 3, 4]; track item) {
+        <div class="bg-gh-dark border border-gh-dark rounded-2xl p-5 shadow-xs animate-pulse h-36"></div>
+      }
+    </div>
+  } @else if (data) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-4 shadow-xl shadow-gh-dark/10 space-y-3 hover:border-gh-primary transition-all duration-300 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="text-xs font-bold text-slate-200">Temperatura del aire</span>
+          <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18" /></svg>
+          </div>
+        </div>
+        <div class="text-center py-1">
+          <span class="text-2xl font-black text-white tracking-tight">{{ data.temperature.avg | number:'1.1-1' }}°C</span>
+          <span class="block text-[10px] text-gh-light/60 font-semibold uppercase tracking-wider mt-0.5">Promedio diario</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[10px] bg-white/2 p-2 rounded-xl border border-white/5">
+          <div><span class="text-slate-400 block font-medium">Mínima</span><span class="font-bold text-slate-200">{{ data.temperature.min }}°C</span></div>
+          <div class="border-l border-white/5"><span class="text-slate-400 block font-medium">Máxima</span><span class="font-bold text-slate-200">{{ data.temperature.max }}°C</span></div>
+        </div>
+      </div>
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-4 shadow-xl shadow-gh-dark/10 space-y-3 hover:border-gh-primary transition-all duration-300 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="text-xs font-bold text-slate-200">Humedad ambiente</span>
+          <div class="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+          </div>
+        </div>
+        <div class="text-center py-1">
+          <span class="text-2xl font-black text-white tracking-tight">{{ data.humidity.avg | number:'1.1-1' }}%</span>
+          <span class="block text-[10px] text-gh-light/60 font-semibold uppercase tracking-wider mt-0.5">Promedio diario</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[10px] bg-white/2 p-2 rounded-xl border border-white/5">
+          <div><span class="text-slate-400 block font-medium">Mínima</span><span class="font-bold text-slate-200">{{ data.humidity.min }}%</span></div>
+          <div class="border-l border-white/5"><span class="text-slate-400 block font-medium">Máxima</span><span class="font-bold text-slate-200">{{ data.humidity.max }}%</span></div>
+        </div>
+      </div>
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-4 shadow-xl shadow-gh-dark/10 space-y-3 hover:border-gh-primary transition-all duration-300 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="text-xs font-bold text-slate-200">Humedad de suelo</span>
+          <div class="w-7 h-7 rounded-lg bg-gh-primary/20 text-gh-light flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 3h13.5m-13.5-6h13.5m-13.5-3h13.5" /></svg>
+          </div>
+        </div>
+        <div class="text-center py-0.5">
+          <span class="text-2xl font-black text-white tracking-tight">{{ calculateSoilPercentage(data.soil_raw.avg) }}%</span>
+          <span class="block text-[9px] text-gh-primary font-bold uppercase tracking-wider mt-0.5">Equivalencia hídrica</span>
+          <span class="text-[11px] font-semibold text-slate-400 block mt-0.5">Valor bruto: {{ data.soil_raw.avg | number:'1.0-0' }} ADC</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[10px] bg-white/2 p-2 rounded-xl border border-white/5">
+          <div><span class="text-slate-400 block font-medium">Saturado</span><span class="font-bold text-slate-200">{{ data.soil_raw.min }}</span></div>
+          <div><span class="text-slate-400 block font-medium">Seco</span><span class="font-bold text-slate-200">{{ data.soil_raw.max }}</span></div>
+        </div>
+      </div>
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-4 shadow-xl shadow-gh-dark/10 space-y-3 hover:border-gh-primary transition-all duration-300 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="text-xs font-bold text-slate-200">Potencial de hidrógeno (pH)</span>
+          <div class="w-7 h-7 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v17.792M14.25 3.104v17.792M3.104 9.75h17.792M3.104 14.25h17.792" /></svg>
+          </div>
+        </div>
+        <div class="text-center py-1">
+          <span class="text-2xl font-black text-white tracking-tight">{{ data.ph.avg | number:'1.1-1' }}</span>
+          <span class="block text-[10px] text-gh-light/60 font-semibold uppercase tracking-wider mt-0.5">Índice de acidez</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[10px] bg-white/2 p-2 rounded-xl border border-white/5">
+          <div><span class="text-slate-400 block font-medium">Mínimo</span><span class="font-bold text-slate-200">{{ data.ph.min }}</span></div>
+          <div class="border-l border-white/5"><span class="text-slate-400 block font-medium">Máximo</span><span class="font-bold text-slate-200">{{ data.ph.max }}</span></div>
+        </div>
+      </div>
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-4 shadow-xl shadow-gh-dark/10 space-y-3 hover:border-gh-primary transition-all duration-300 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="text-xs font-bold text-slate-200">Dióxido de carbono (CO2)</span>
+          <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" /></svg>
+          </div>
+        </div>
+        <div class="text-center py-1">
+          <span class="text-2xl font-black text-white tracking-tight">{{ data.co2.avg | number:'1.0-0' }}</span>
+          <span class="block text-[10px] text-gh-light/60 font-semibold uppercase tracking-wider mt-0.5">Concentración ppm</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[10px] bg-white/2 p-2 rounded-xl border border-white/5">
+          <div><span class="text-slate-400 block font-medium">Mínimo</span><span class="font-bold text-slate-200">{{ data.co2.min }}</span></div>
+          <div class="border-l border-white/5"><span class="text-slate-400 block font-medium">Máximo</span><span class="font-bold text-slate-200">{{ data.co2.max }}</span></div>
+        </div>
+      </div>
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-4 shadow-xl shadow-gh-dark/10 space-y-3 hover:border-gh-primary transition-all duration-300 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="text-xs font-bold text-slate-200">Iluminancia</span>
+          <div class="w-7 h-7 rounded-lg bg-gh-secondary/10 text-gh-secondary flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5M12 19.5V21M4.22 4.22l1.06 1.06m11.44 11.44l1.06 1.06M1.5 12H3m18 0h1.5M4.22 19.78l1.06-1.06M16.72 7.28l1.06-1.06M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" /></svg>
+          </div>
+        </div>
+        <div class="text-center py-1">
+          <span class="text-2xl font-black text-white tracking-tight">{{ data.lux.avg | number:'1.0-0' }} lx</span>
+          <span class="block text-[10px] text-gh-light/60 font-semibold uppercase tracking-wider mt-0.5">Radiación solar neta</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[10px] bg-white/2 p-2 rounded-xl border border-white/5">
+          <div><span class="text-slate-400 block font-medium">Mínimo</span><span class="font-bold text-slate-200">{{ data.lux.min }} lx</span></div>
+          <div class="border-l border-white/5"><span class="text-slate-400 block font-medium">Máximo</span><span class="font-bold text-slate-200">{{ data.lux.max }} lx</span></div>
+        </div>
+      </div>
+      <div class="bg-gh-dark border-y border-r border-l-4 border-gh-dark border-l-gh-primary rounded-2xl p-4 shadow-xl shadow-gh-dark/10 space-y-3 hover:border-r-gh-primary transition-all duration-300 col-span-1 sm:col-span-2 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="text-xs font-bold text-gh-light">Caudal de riego hidráulico</span>
+          <div class="w-7 h-7 rounded-lg bg-gh-primary/20 text-gh-light flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12c0-3.51 2.417-6.456 5.659-7.177m0 14.354A7.501 7.501 0 0012 21.75c3.51 0 6.456-2.417 7.177-5.659M21.75 12c0 3.51-2.417 6.456-5.659 7.177M12 2.25c-3.51 0-6.456 2.417-7.177 5.659M12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" /></svg>
+          </div>
+        </div>
+        <div class="text-center py-1">
+          <span class="text-2xl font-black text-white tracking-tight">{{ data.water_flow.avg | number:'1.2-2' }} L/min</span>
+          <span class="block text-[10px] text-gh-light/60 font-semibold uppercase tracking-wider mt-0.5">Tasa de flujo promedio</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[10px] bg-white/2 p-2 rounded-xl border border-white/5">
+          <div><span class="text-slate-400 block font-medium">Flujo mínimo</span><span class="font-bold text-slate-200">{{ data.water_flow.min }} L/min</span></div>
+          <div class="border-l border-white/5"><span class="text-slate-400 block font-medium">Pico máximo</span><span class="font-bold text-slate-200">{{ data.water_flow.max }} L/min</span></div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

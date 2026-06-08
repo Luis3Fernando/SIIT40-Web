@@ -1,4 +1,4 @@
-<div class="space-y-4">
+<div class="space-y-4 font-sans">
   <div>
     <h2 class="text-base font-bold text-slate-900 tracking-tight">Estado operativo</h2>
     <p class="text-xs text-slate-500 mt-0.5">Visión general macro y alertas tempranas del entorno automatizado.</p>
@@ -6,37 +6,45 @@
   @if (isLoading) {
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
       @for (item of [1, 2, 3]; track item) {
-        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs animate-pulse h-24"></div>
+        <div class="bg-gh-dark/95 border border-gh-dark rounded-2xl p-5 shadow-xs animate-pulse h-24"></div>
       }
     </div>
   } @else if (data) {
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-      <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex items-center justify-between hover:border-slate-200 transition-all">
+      <div class="bg-gh-secondary border border-gh-secondary rounded-2xl p-5 shadow-lg shadow-gh-secondary/10 flex items-center justify-between hover:scale-[1.01] transition-all duration-300 select-none">
         <div class="space-y-1">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Biomasa activa</span>
-          <span class="text-2xl font-black text-slate-900 leading-none">{{ data.plant_summary.total_plants_count }}</span>
-          <span class="text-[10px] text-slate-400 block font-medium">Unidades vegetales vivas</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-gh-dark/60 block">Plantas</span>
+          <span class="text-2xl font-black text-gh-dark leading-none">{{ data.plant_summary.total_plants_count }}</span>
+          <span class="text-[10px] text-gh-dark/70 block font-semibold">Unidades vegetales vivas</span>
         </div>
-        <div class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-xl text-slate-700">🌱</div>
+        <div class="w-11 h-11 rounded-xl bg-gh-dark text-gh-secondary flex items-center justify-center shrink-0 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21V9.75M12 9.75a3.375 3.375 0 016.75 0v.013a6.75 6.75 0 01-6.75 6.737M12 9.75a3.375 3.375 0 00-6.75 0v.013a6.75 6.75 0 006.75 6.737" /></svg>
+        </div>
       </div>
-      <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex items-center justify-between hover:border-slate-200 transition-all">
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-5 shadow-xl shadow-gh-dark/5 flex items-center justify-between hover:border-gh-primary transition-all duration-300 select-none">
         <div class="space-y-1">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Sectores bajo riego</span>
-          <span class="text-2xl font-black text-slate-900 leading-none">{{ data.plant_summary.active_crop_sectors }}</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-gh-light/50 block">Sectores bajo riego</span>
+          <span class="text-2xl font-black text-white leading-none">{{ data.plant_summary.active_crop_sectors }}</span>
           <span class="text-[10px] text-slate-400 block font-medium">Zonas perimetrales activas</span>
         </div>
-        <div class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-xl text-slate-700">💧</div>
+        <div class="w-11 h-11 rounded-xl bg-white/4 border border-white/5 text-gh-secondary flex items-center justify-center shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+        </div>
       </div>
-      <div [ngClass]="data.plant_summary.has_critical_plants ? 'border-red-100 bg-red-50/10' : 'bg-white border-slate-100'" class="border rounded-2xl p-5 shadow-xs flex items-center justify-between hover:border-slate-200 transition-all">
+      <div [ngClass]="data.plant_summary.has_critical_plants ? 'bg-gh-danger/10 border-gh-danger/20' : 'bg-gh-dark border-gh-dark'" class="border rounded-2xl p-5 shadow-xl flex items-center justify-between transition-all duration-300 select-none">
         <div class="space-y-1">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Umbrales de riesgo</span>
-          <span [ngClass]="data.plant_summary.has_critical_plants ? 'text-red-600' : 'text-gh-primary'" class="text-sm font-bold block mt-1">
+          <span [ngClass]="data.plant_summary.has_critical_plants ? 'text-gh-danger/60' : 'text-gh-light/50'" class="text-[10px] font-bold uppercase tracking-wider block">Umbrales de riesgo</span>
+          <span [ngClass]="data.plant_summary.has_critical_plants ? 'text-gh-danger' : 'text-gh-success'" class="text-sm font-bold block mt-1">
             {{ data.plant_summary.has_critical_plants ? 'Atención requerida' : 'Estable e idóneo' }}
           </span>
-          <span class="text-[10px] text-slate-400 block font-medium">Estado general del sistema</span>
+          <span [ngClass]="data.plant_summary.has_critical_plants ? 'text-gh-danger/70' : 'text-slate-400'" class="text-[10px] block font-medium">Estado general del sistema</span>
         </div>
-        <div [ngClass]="data.plant_summary.has_critical_plants ? 'bg-red-50 text-red-500' : 'bg-emerald-50 text-emerald-500'" class="w-11 h-11 rounded-xl flex items-center justify-center text-lg font-bold">
-          {{ data.plant_summary.has_critical_plants ? '⚠' : '✓' }}
+        <div [ngClass]="data.plant_summary.has_critical_plants ? 'bg-gh-danger/20 text-gh-danger animate-pulse' : 'bg-white/4 border border-white/5 text-gh-success'" class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors">
+          @if (data.plant_summary.has_critical_plants) {
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+          } @else {
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+          }
         </div>
       </div>
     </div>

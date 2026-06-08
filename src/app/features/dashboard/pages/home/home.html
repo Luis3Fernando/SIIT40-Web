@@ -1,4 +1,8 @@
 <div class="space-y-8 font-sans text-slate-800 max-w-6xl mx-auto select-none p-1 animate-fade-in">
   <app-section-status [data]="statusData" [isLoading]="isLoadingStatus"></app-section-status>
 
+  <hr class="border-slate-100" />
+
+  <app-section-metrics [data]="metricsData" [isLoading]="isLoadingMetrics" (filterChange)="onMetricsFilterChange($event)"></app-section-metrics>
+
   </div>
