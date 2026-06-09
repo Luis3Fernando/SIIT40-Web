@@ -1,0 +1,9 @@
+<div class="bg-gh-dark border border-gh-dark rounded-2xl p-4 shadow-xl shadow-gh-dark/10 flex flex-col justify-between h-72 transition-all duration-300 hover:border-gh-primary/40">
+  <div class="flex items-center justify-between border-b border-white/5 pb-2 shrink-0">
+    <span class="text-xs font-bold text-slate-200 tracking-wide">{{ title }}</span>
+    <span class="text-[10px] font-bold text-gh-secondary bg-gh-secondary/10 px-2 py-0.5 rounded-md uppercase tracking-wider">{{ unit }}</span>
+  </div>
+  <div class="relative flex-1 pt-3 w-full h-full">
+    <canvas baseChart [data]="chartData" [options]="chartOptions" [type]="chartType"></canvas>
+  </div>
+</div>

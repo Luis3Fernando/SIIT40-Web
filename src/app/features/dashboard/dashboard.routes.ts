@@ -11,6 +11,11 @@ export const DASHBOARD_ROUTES: Routes = [
         data: { title: 'Resumen general' }
       },
       {
+        path: 'analytics',
+        loadComponent: () => import('./pages/analytics/analytics').then(m => m.Analytics),
+        data: { title: 'Análisis de datos' }
+      },
+      {
         path: 'about',
         loadComponent: () => import('./pages/about/about').then(m => m.About),
         data: { title: 'Acerca del sistema' }

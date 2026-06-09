@@ -41,15 +41,15 @@
           <app-sidebar-item route="/dashboard/home" label="Dashboard" [isCollapsed]="isCollapsed">
             <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
           </app-sidebar-item>
-          <app-sidebar-item route="/dashboard/sectors" label="Sectores" [badge]="2" [isCollapsed]="isCollapsed">
-            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-12-3h12m-12-3h12m-12-3h12m-12-3h12m-12-3h12" /></svg>
-          </app-sidebar-item>
-          <app-sidebar-item route="/species" label="Especies" [isCollapsed]="isCollapsed">
-            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3a9 9 0 110 18 9 9 0 010-18z" /></svg>
+          <app-sidebar-item route="/dashboard/analytics" label="Análisis de datos" [isCollapsed]="isCollapsed">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" /></svg>
           </app-sidebar-item>
           <app-sidebar-item route="/greenhouse/plants" label="Invernadero" [isCollapsed]="isCollapsed">
             <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
           </app-sidebar-item>
+          <app-sidebar-item route="/species" label="Especies" [isCollapsed]="isCollapsed">
+            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3a9 9 0 110 18 9 9 0 010-18z" /></svg>
+          </app-sidebar-item>          
         </div>
       </div>
       <div>
@@ -57,9 +57,6 @@
           <span class="block px-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Herramientas</span>
         }
         <div class="space-y-0.5">
-          <app-sidebar-item route="/dashboard/analytics" label="Analítica" [isCollapsed]="isCollapsed">
-            <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" /></svg>
-          </app-sidebar-item>
           <app-sidebar-item route="/dashboard/about" label="Acerca de" [isCollapsed]="isCollapsed">
             <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 11.517 1.407l-.04.02v3.999a.75.75 0 01-1.5 0V11.25zm.72-3.451a.75.75 0 10-1.5 0 .75.75 0 001.5 0zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           </app-sidebar-item>

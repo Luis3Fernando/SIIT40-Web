@@ -1,0 +1,112 @@
+<div class="space-y-6 font-sans text-slate-800 max-w-6xl mx-auto select-none p-1 animate-fade-in">
+  <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-2xs space-y-4">
+    <div>
+      <h2 class="text-base font-bold text-gh-dark tracking-tight">Consola de visualización temporal simultánea</h2>
+      <p class="text-xs text-slate-500 mt-0.5">Filtro global sincronizado para proyectar analíticamente el comportamiento lineal de todas las variables físicas.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end border-t border-slate-50 pt-4">
+      <div class="w-full"><app-select label="Granularidad" name="groupBy" [(ngModel)]="groupBy" [options]="groupByOptions" (ngModelChange)="fetchTimeSeries()"></app-select></div>
+      <div class="flex flex-col gap-1.5 w-full">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Fecha inicial</span>
+        <input type="date" name="startDate" [(ngModel)]="startDate" (change)="fetchTimeSeries()" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 h-9 transition-all cursor-pointer" />
+      </div>
+      <div class="flex flex-col gap-1.5 w-full">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Fecha final</span>
+        <input type="date" name="endDate" [(ngModel)]="endDate" (change)="fetchTimeSeries()" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 h-9 transition-all cursor-pointer" />
+      </div>
+      <div class="w-full"><app-select label="Segregación" name="node" [(ngModel)]="selectedNode" [options]="nodeOptions" (ngModelChange)="fetchTimeSeries()"></app-select></div>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      @for (item of [1,2,3,4]; track item) {
+        <div class="bg-white border border-slate-100 rounded-2xl h-72 animate-pulse p-5 shadow-2xs"></div>
+      }
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">1. Temperatura del aire</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">°C</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="tempData" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">2. Humedad ambiente</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">%</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="humData" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">3. Humedad de suelo</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">ADC</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="soilData" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">4. Nivel de pH</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">pH</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="phData" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">5. Dióxido de carbono</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">ppm</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="co2Data" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">6. Iluminancia (Radiación Solar)</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">lx</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="luxData" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">7. Caudal de riego hídrico</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">L/min</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="flowData" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+      <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-2xs flex flex-col justify-between h-72">
+        <div class="flex items-center justify-between border-b border-slate-50 pb-2"><span class="text-xs font-bold text-slate-900">8. Volumen hídrico acumulado</span><span class="text-[10px] font-bold text-gh-primary bg-gh-primary/10 px-2 py-0.5 rounded-md uppercase">L</span></div>
+        <div class="relative flex-1 pt-2 w-full h-full"><canvas baseChart [data]="totalData" [options]="chartOptions" [type]="'line'"></canvas></div>
+      </div>
+
+    </div>
+  }
+
+  <div class="bg-white border border-slate-100 rounded-2xl shadow-2xs overflow-hidden">
+    <div class="p-4 border-b border-slate-50 bg-slate-50/40">
+      <span class="text-xs font-bold text-gh-dark uppercase tracking-wider block">Registros crudos indexados de series temporales</span>
+    </div>
+    <div class="overflow-x-auto max-h-64 overflow-y-auto">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="border-b border-slate-100 text-slate-400 font-bold uppercase tracking-wider text-[10px] bg-white sticky top-0 z-10 shadow-2xs">
+            <th class="p-3">Marca temporal</th>
+            <th class="p-3">Identificador nodo</th>
+            <th class="p-3 text-right">Temp. (°C)</th>
+            <th class="p-3 text-right">Hum. (%)</th>
+            <th class="p-3 text-right">Suelo (ADC)</th>
+            <th class="p-3 text-right">pH</th>
+            <th class="p-3 text-right">CO2 (ppm)</th>
+            <th class="p-3 text-right">Iluminancia (lx)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50 font-medium text-slate-700 bg-white">
+          @for (row of timeSeriesData; track row.time_bucket + row.nodo_id) {
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="p-3 text-slate-500 font-mono">{{ row.time_bucket | date: (groupBy === 'hour' ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy') }}</td>
+              <td class="p-3"><span [ngClass]="row.nodo_id === 'A' ? 'bg-emerald-50 text-gh-success' : 'bg-blue-50 text-blue-600'" class="px-2 py-0.5 rounded-md font-bold text-[10px]">Nodo {{ row.nodo_id }}</span></td>
+              <td class="p-3 text-right font-mono">{{ row.temp_c | number:'1.2-2' }}</td>
+              <td class="p-3 text-right font-mono">{{ row.hum_pct | number:'1.1-1' }}</td>
+              <td class="p-3 text-right font-mono">{{ row.soil_raw | number:'1.0-0' }}</td>
+              <td class="p-3 text-right font-mono">{{ row.ph | number:'1.2-2' }}</td>
+              <td class="p-3 text-right font-mono">{{ row.co2 | number:'1.0-0' }}</td>
+              <td class="p-3 text-right font-mono">{{ row.lux | number:'1.0-0' }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="8" class="p-8 text-center text-slate-400 font-medium">No se registran vectores de series de tiempo para la ventana temporal seleccionada.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
