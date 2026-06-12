@@ -13,7 +13,7 @@ export class SectionMetrics implements OnInit {
   @Input() data: GreenhouseStatistics | null = null;
   @Input() isLoading = false;
   @Output() filterChange = new EventEmitter<{ date: string; node: string }>();
-  selectedDate = '2026-06-08';
+  selectedDate = '2026-04-30';
   selectedNode = 'A';
   nodeOptions = [
     { value: 'A', label: 'Nodo A' },
