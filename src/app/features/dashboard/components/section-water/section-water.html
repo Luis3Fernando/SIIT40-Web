@@ -1,0 +1,72 @@
+<div class="space-y-4 font-sans">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white border border-slate-100 rounded-2xl p-5 shadow-2xs">
+    <div>
+      <h2 class="text-base font-bold text-gh-dark tracking-tight">Optimización e indicadores de consumo hídrico</h2>
+      <p class="text-xs text-slate-500 mt-0.5">Auditoría volumétrica agregada mensualmente y control de eventos de pulsos automáticos de riego.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-4">
+      <div class="flex flex-col gap-1 w-full sm:w-36">
+        <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 select-none">Inicio de periodo</span>
+        <input type="date" name="start" [(ngModel)]="startDate" (change)="emitFilters()" class="px-2.5 py-1.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 bg-white h-9 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 transition-all cursor-pointer" />
+      </div>
+      <div class="flex flex-col gap-1 w-full sm:w-36">
+        <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 select-none">Fin de periodo</span>
+        <input type="date" name="end" [(ngModel)]="endDate" (change)="emitFilters()" class="px-2.5 py-1.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 bg-white h-9 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 transition-all cursor-pointer" />
+      </div>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="bg-gh-dark h-28 rounded-2xl animate-pulse"></div>
+      <div class="bg-gh-dark h-28 rounded-2xl animate-pulse"></div>
+    </div>
+  } @else if (data) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="bg-gh-dark border-y border-r border-l-4 border-gh-dark border-l-gh-secondary rounded-2xl p-5 shadow-xl shadow-gh-dark/10 flex items-center justify-between">
+        <div class="space-y-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-gh-light/50 block">Total de litros</span>
+          <span class="text-3xl font-black text-white tracking-tight">{{ data.global_total_liters | number:'1.2-2' }} L</span>
+          <span class="text-[10px] text-gh-secondary font-semibold block">Volumen total acumulado</span>
+        </div>
+        <div class="w-12 h-11 rounded-xl bg-white/4 text-gh-secondary flex items-center justify-center border border-white/5">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12c0-3.51 2.417-6.456 5.659-7.177m0 14.354A7.501 7.501 0 0012 21.75c3.51 0 6.456-2.417 7.177-5.659M21.75 12c0 3.51-2.417 6.456-5.659 7.177M12 2.25c-3.51 0-6.456 2.417-7.177 5.659M12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" /></svg>
+        </div>
+      </div>
+
+      <div class="bg-gh-dark border border-gh-dark rounded-2xl p-5 shadow-xl shadow-gh-dark/10 flex items-center justify-between">
+        <div class="space-y-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-gh-light/50 block">Total de activación de riego</span>
+          <span class="text-3xl font-black text-white tracking-tight">{{ data.global_irrigation_events }}</span>
+          <span class="text-[10px] text-slate-400 block font-medium">Ciclos de apertura de electroválvulas exitosos</span>
+        </div>
+        <div class="w-12 h-11 rounded-xl bg-white/4 text-gh-primary flex items-center justify-center border border-white/5">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border border-slate-100 rounded-2xl shadow-2xs overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-slate-100 text-slate-400 font-bold uppercase tracking-wider text-[10px] bg-slate-50/50">
+              <th class="p-3">Intervalo temporal</th>
+              <th class="p-3 text-right">Volumen (L)</th>
+              <th class="p-3 text-right">Eventos disparados</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-50 font-medium text-slate-700 bg-white">
+            @for (row of data.breakdown; track row.time_bucket) {
+              <tr class="hover:bg-slate-50/50 transition-colors">
+                <td class="p-3 text-slate-500 font-mono">{{ row.time_bucket | date: 'dd/MM/yyyy' }}</td>
+                <td class="p-3 text-right font-mono text-gh-dark font-bold">{{ row.total_liters | number:'1.2-2' }} L</td>
+                <td class="p-3 text-right font-mono"><span class="px-2 py-0.5 bg-slate-100 rounded-md font-bold text-slate-700">{{ row.irrigation_events }} pulsos</span></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</div>

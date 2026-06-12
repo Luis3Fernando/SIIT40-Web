@@ -38,3 +38,17 @@ export interface TimeSeriesItem {
   flow_lmin: number;
   total_l: number;
 }
+
+export interface WaterConsumptionBreakdown {
+  time_bucket: string;
+  total_liters: number;
+  average_flow_rate: number;
+  irrigation_events: number;
+}
+
+export interface WaterConsumptionData {
+  greenhouse_id: number;
+  global_total_liters: number;
+  global_irrigation_events: number;
+  breakdown: WaterConsumptionBreakdown[];
+}

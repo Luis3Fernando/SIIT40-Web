@@ -1,20 +1,24 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AnalyticsService } from '../../../../core/services/analytics.service';
-import { GreenhouseStatus, GreenhouseStatistics } from '../../../../core/models/analytics.model';
+import { GreenhouseStatus, GreenhouseStatistics, WaterConsumptionData } from '../../../../core/models/analytics.model';
 import { SectionStatus } from '@features/dashboard/components/section-status/section-status';
 import { SectionMetrics } from '@features/dashboard/components/section-metrics/section-metrics';
+import { SectionWater } from '@features/dashboard/components/section-water/section-water';
 
 @Component({
   selector: 'app-home',
-  imports: [SectionStatus, SectionMetrics],
+  imports: [SectionStatus, SectionMetrics, SectionWater],
   templateUrl: './home.html',
 })
 export class Home implements OnInit {
   statusData: GreenhouseStatus | null = null;
   metricsData: GreenhouseStatistics | null = null;
+  waterData: WaterConsumptionData | null = null;
+
   isLoadingStatus = false;
   isLoadingMetrics = false;
+  isLoadingWater = false;
 
   private analyticsService = inject(AnalyticsService);
   private toastr = inject(ToastrService);
@@ -50,22 +54,32 @@ export class Home implements OnInit {
       next: (response) => {
         this.isLoadingMetrics = false;
         if (response.status === 'success') {
-          if (!response.data) {
-            // El backend no registra hardware activo ese día, forzamos la UI a ceros sin romperla
-            this.metricsData = this.getZeroedMetrics();
-            const infoMsg = response.message?.[0]?.message || 'No hay datos de telemetría para los filtros seleccionados.';
-            this.toastr.info(infoMsg, 'Información de red');
-          } else {
-            this.metricsData = response.data;
-          }
-        } else {
-          this.toastr.error('No se pudieron procesar las estadísticas hídricas.', 'Error');
+          this.metricsData = response.data ? response.data : this.getZeroedMetrics();
+          if (!response.data) this.toastr.info('No hay telemetría para los filtros seleccionados.', 'Info');
         }
         this.cdr.detectChanges();
       },
       error: () => {
         this.isLoadingMetrics = false;
-        this.toastr.error('Error al conectar con la base de datos de telemetría.', 'Error de red');
+        this.toastr.error('Error de conexión con la base de datos de sensores.', 'Error');
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  onWaterFilterChange(filters: { unit: string; start: string; end: string }) {
+    this.isLoadingWater = true;
+    this.analyticsService.getWaterConsumption(1, filters.unit, filters.start, filters.end).subscribe({
+      next: (response) => {
+        this.isLoadingWater = false;
+        if (response.status === 'success') {
+          this.waterData = response.data;
+        }
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.isLoadingWater = false;
+        this.toastr.error('Error de comunicación al compilar métricas hídricas.', 'Error de red');
         this.cdr.detectChanges();
       }
     });
