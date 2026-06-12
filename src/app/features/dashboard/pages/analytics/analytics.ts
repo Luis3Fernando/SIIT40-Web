@@ -46,8 +46,8 @@ export class Analytics implements OnInit {
   };
 
   groupByOptions = [
-    { value: 'day', label: 'Macro (Por Días)' },
-    { value: 'hour', label: 'Detalle Fino (Por Horas)' }
+    { value: 'day', label: 'Por días' },
+    { value: 'hour', label: 'Por horas' }
   ];
 
   nodeOptions = [
